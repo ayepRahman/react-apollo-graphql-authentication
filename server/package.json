@@ -1,0 +1,67 @@
+{
+  "name": "react-apollo-graphql-server",
+  "version": "1.0.0",
+  "description": "boilerplate for apollo graphql server",
+  "main": "server.ts",
+  "scripts": {
+    "dev": "yarn ts-node-dev --respawn src/server.ts",
+    "start": "yarn build && node build/server.js",
+    "build": "rimraf ./build && tsc",
+    "test": "jest --config='./jest.config.js' ",
+    "test:dev": "jest --config='./jest.config.js' --watchman",
+    "test:coverage": "jest --config='./jest.config.js' --coverage",
+    "generate": "plop --plopfile generators/index.js",
+    "lint": "tsc --noEmit && eslint '*/**/*.{js,jsx,ts,tsx}' --quiet --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.6",
+    "apollo-server-express": "^2.9.5",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.1",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/mongoose": "^5.7.5",
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit && lint-staged",
+      "pre-push": ""
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint . --fix",
+      "jest --config='./jest.config.js' --bail --coverage",
+      "git add"
+    ],
+    "*.{json}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

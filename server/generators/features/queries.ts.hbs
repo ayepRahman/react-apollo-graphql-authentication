@@ -1,0 +1,51 @@
+/*
+ * 
+ * @dev apollo-server error handling doc
+ * https://www.apollographql.com/docs/apollo-server/data/errors/#gatsby-focus-wrapper
+/
+
+import { IResolverMap } from 'interfaces/IResolvers';
+import { AuthenticationError, UserInputError, ApolloError } from 'apollo-server'
+
+export default <IResolverMap>{
+  get{{ properCase name }}ById: async (parent, args, { models }, info) => {
+    try {
+      const {{ lowerCase name }} = await models.{{ properCase name }}s.findById();
+      return {{ lowerCase name }};
+    } catch (error) {
+      return new ApolloError("Failure!");
+    }
+  },
+  get{{ properCase name }}ByIds: async (parent, args, { models }, info) => {
+    try {
+      const {{ lowerCase name }}s = await models.{{ properCase name }}s.findByIds();
+      return  {{ lowerCase name }}s;
+    } catch (error) {
+      return new ApolloError("Failure!");
+    }
+  },
+  get{{ properCase name }}One: async (parent, args, { models }, info) => {
+    try {
+      const {{ lowerCase name }} = await models.{{ properCase name }}s.findOne();
+      return {{ lowerCase name }};
+    } catch (error) {
+      return new ApolloError("Failure!");
+    }
+  },
+  get{{ properCase name }}Many: async (parent, args, { models }, info) => {
+    try {
+      const {{ lowerCase name }}s = await models.{{ properCase name }}s.findMany();
+      return {{ lowerCase name }}s;
+    } catch (error) {
+      return new ApolloError("Failure!");
+    }
+  },
+  get{{ properCase name }}Count: async (parent, args, { models }, info) => {
+    try {
+      const count = await models.{{ properCase }}s.count();
+      return count;
+    } catch (error) {
+      return new ApolloError("Failure!");
+    }
+  },
+};

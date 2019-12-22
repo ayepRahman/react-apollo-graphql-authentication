@@ -1,0 +1,25 @@
+/**
+ *
+ * Tests for {{ properCase name }}
+ *
+ * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
+ *
+ */
+
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import {{ properCase name }} from 'app/components/{{ properCase name }}'
+
+const defaultProps = {}
+
+const renderSubject = props => render(
+  <{{ properCase name }} {...defaultProps} {...props} />
+)
+
+afterEach(cleanup);
+
+describe({{ properCase name }}, () => {
+  it('should render on load', () => {
+    renderSubject({})
+  });
+});

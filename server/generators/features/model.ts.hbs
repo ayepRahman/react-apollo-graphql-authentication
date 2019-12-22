@@ -1,0 +1,44 @@
+/*
+ * @see 
+ * https://mongoosejs.com/docs/guide.html#definition
+ * https://mongoosejs.com/docs/schematypes.html#what-is-a-schema-type
+ */
+ 
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface I{{ properCase name  }}s extends Document {
+  name:    String,
+  binary:  Buffer,
+  living:  Boolean,
+  updated: { type: Date, default: Date.now },
+  age:     { type: Number, min: 18, max: 65 },
+  mixed:   Schema.Types.Mixed,
+  _someId: Schema.Types.ObjectId,
+  decimal: Schema.Types.Decimal128,
+  array: [],
+  ofString: [String],
+  ofNumber: [Number],
+  ofDates: [Date],
+  ofBuffer: [Buffer],
+  ofBoolean: [Boolean],
+  ofMixed: [Schema.Types.Mixed],
+  ofObjectId: [Schema.Types.ObjectId],
+  ofArrays: [[]],
+  ofArrayOfNumbers: [[Number]],
+  nested: {
+    stuff: { type: String, lowercase: true, trim: true }
+  },
+  map: Map,
+  mapOfString: {
+    type: Map,
+    of: String
+  }
+}
+
+const {{ properCase name  }}sSchema: Schema = new Schema({
+  name: { type: String, required: true },
+});
+
+const {{ properCase name  }}sModel = mongoose.model<I{{ properCase name  }}s>('{{ properCase name  }}', {{ properCase name  }}sSchema);
+
+export { {{ properCase name  }}sModel };

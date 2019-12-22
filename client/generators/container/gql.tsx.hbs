@@ -1,0 +1,43 @@
+/*
+ * GQL
+ * A JavaScript template literal tag that parses GraphQL query strings into the standard GraphQL AST.
+ *
+ */
+
+import gql from 'graphql-tag';
+
+export const GET_{{constantCase name}} = gql`
+  query {
+    get{{ properCase name }} {
+      id
+      task
+      checked
+    }
+  }
+`;
+
+export const CREATE_{{constantCase name}} = gql`
+  mutation Create{{properCase name}}s($task: String!, $checked: Boolean!) {
+    create{{ properCase name }}s(task: $task, checked: $checked) {
+      id
+      task
+      checked
+    }
+  }
+`;
+
+export const DELETE_{{constantCase name}} = gql`
+  mutation Delete{{ properCase name }}($id: ID!) {
+    delete{{ properCase name }}ById(id: $id) {
+      task
+    }
+  }
+`;
+
+export const UPDATE_{{constantCase name}} = gql`
+  mutation Update{{ properCase name }}($task: String!, $id: ID!, $checked: Boolean!) {
+    update{{ properCase name }}sById(task: $task, id: $id, checked: $checked) {
+      task
+    }
+  }
+`;

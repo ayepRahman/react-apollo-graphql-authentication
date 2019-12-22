@@ -1,0 +1,38 @@
+//TODO: improve type schema
+
+const typeDefs = `
+    type {{ properCase name }} {
+      id: ID!
+      name: String!
+      dob: Boolean!
+    }
+  
+    {{#if wantQuery}}
+    type Query {
+      {{ camelCase name }}ById: {{ properCase name }}!
+      {{ camelCase name }}ByIds: [{{ properCase name }}!]!
+      {{ camelCase name }}One: {{ properCase name }}!
+      {{ camelCase name }}Many: [{{ properCase name }}!
+      {{ camelCase name }}Count: [{{ properCase name }}!
+    }
+    {{/if}}
+
+    {{#if wantMutation}}
+    type Mutation {
+      create{{ propercaseCase name }}(task: String!, checked: Boolean!): [Todos!]!
+      update{{ propercaseCase name }}ById(id: ID!, task: String!, checked: Boolean!): [Todos!]!
+      delete{{ propercaseCase name }}Id(id: ID!): [Todos!]!
+    }
+    {{/if}}
+
+    schema {
+      {{#if wantQuery}}  
+      query: Query
+      {{/if}}
+      {{#if wantMutation}}
+      mutation: Mutation
+      {{/if}}
+    }
+`;
+
+export default typeDefs;

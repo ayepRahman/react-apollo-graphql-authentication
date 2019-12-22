@@ -1,0 +1,174 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+
+import React from 'react';
+import { 
+{{#if wantUseQuery}}
+  useQuery,
+{{/if}}
+{{#if wantUseLazyQuery}}
+  useLazyQuery,
+{{/if}}
+{{#if wantUseMutation}}
+  useMutation,
+{{/if}}
+{{#if wantUseSubscription}}
+  useSubscription,
+{{/if}}
+} from '@apollo/react-hooks'
+{{#if wantRouteHooks}}
+import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom'
+{{/if}}
+{{#if wantFormHooks}}
+import { Input, Button } from 'antd';
+import useForm from 'react-hook-form'
+import { validationSchema } from './validations'
+import { fieldNames } from './enumerations'
+{{/if}}
+import { 
+  GET_{{constantCase name}},
+  CREATE_{{constantCase name}},
+} from './gql'
+{{#if wantStyledComponents}}
+import styled from 'styled-components'
+{{/if}}
+{{#if wantStyledComponents}}
+const {{properCase name}}Container = styled.div``
+{{/if}}
+
+
+{{#if wantUseQuery}}
+// @dev call query when component render
+export const Get{{ properCase name }} = () => {
+  const { loading, error, data } = useQuery(GET_{{constantCase name}}, {
+    variables: {
+      name: 'John Doe'
+    }
+  })
+
+  if (loading) return <div>...loading</div>
+  if (error) return <div>{JSON.stringify(error)}</div>
+  return (
+    <div>{JSON.stringify(data)}</div>
+  )
+}
+{{/if}}
+
+{{#if wantUseLazyQuery}}
+// @dev return function that you can call to execute query
+export const LazyGet{{ properCase name }} = () => {
+  const [getTodos, { loading, error, data }] = useLazyQuery(GET_{{constantCase name}})
+
+  React.useEffect(() => {
+    getTodos({
+      variables: {
+        name: 'John Doe'
+      }
+    })
+  }, [])
+
+  if (loading) return <div>...loading</div>
+  if (error) return <div>{JSON.stringify(error)}</div>
+  return (
+    <div>{JSON.stringify(data)}</div>
+  )
+}
+{{/if}}
+
+{{#if wantUseMutation}}
+export const Create{{ properCase name }} = () => {
+  const [createTodo,  { loading, error, data }] = useMutation(CREATE_{{constantCase name}})
+
+  if (loading) return <div>...Loading</div>
+  if (error) return <div>{JSON.stringify(error)}</div>
+  return (
+    <div>
+      <button 
+        onClick={() => createTodo({ 
+          variables: { task: 'Buy Something', checked: true }  
+        })}
+      >Add Todo</button>
+      <div>{JSON.stringify(data)}</div>
+    </div>
+  )
+}
+{{/if}}
+
+
+export const {{ properCase name }}: React.FC = () => {
+  {{#if wantFormHooks}}
+  const { register, handleSubmit, setValue, errors, reset } = useForm({
+    validationSchema,
+    defaultValues: {
+      firstName: "bill",
+      lastName: "luo",
+      password: '123123123',
+      confirmPassword: '123123123',
+      email: "bluebill1049@hotmail.com",
+      website: 'www.google.com',
+      pets: [ 'dog', 'cat' ]
+    }
+  });
+
+  React.useEffect(() => {
+    Object.keys(fieldNames).forEach(key => {
+       register({ name: fieldNames[key] });
+    })
+  });
+
+  const onFormSubmit = (values: any) => {
+    console.log(values)
+  }
+
+  const Form = () => {
+    return (
+      <form onSubmit={handleSubmit(onFormSubmit)}>
+        <Input
+          onChange={e => setValue(fieldNames.firstName, e.target.value)}
+          name={fieldNames.firstName}
+          placeholder="First Name"
+        />
+        <Input
+          onChange={e => setValue(fieldNames.lastName, e.target.value)}
+          name={fieldNames.lastName}
+          placeholder="Last Name"
+        />
+        <Input
+          onChange={e => setValue(fieldNames.password, e.target.value)}
+          name={fieldNames.password}
+          placeholder="Password"
+        />
+        <Input
+          onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
+          name={fieldNames.confirmPassword}
+          placeholder="Confirm Password"
+        />
+        <Input
+          onChange={e => setValue(fieldNames.email, e.target.value)}
+          name={fieldNames.email}
+          placeholder="Email"
+        />
+        <Input
+          onChange={e => setValue(fieldNames.website, e.target.value)}
+          name={fieldNames.website}
+          placeholder="Website"
+        />
+        <Button type="primary" htmlType="submit">Submit</Button>
+      </form>
+    )
+  }
+  {{/if}}
+
+  return (
+    <div>
+        {{#if wantFormHooks}}
+        <Form />
+        {{/if}}
+    </div>
+  );
+}
+
+export default {{ properCase name }}
