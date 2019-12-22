@@ -7,16 +7,18 @@
 import * as yup from 'yup';
 import { fieldNames } from './enumerations';
 
-export const createTodoValidationSchema = yup.object().shape({
-  [fieldNames.task]: yup
+export const validationSchema = yup.object().shape({
+  [fieldNames.userName]: yup
     .string()
     .min(4)
     .max(30)
     .required(),
-});
-
-export const updateTodoValidationSchema = yup.object().shape({
-  [fieldNames.task]: yup
+  [fieldNames.password]: yup
+    .string()
+    .min(4)
+    .max(30)
+    .required(),
+  [fieldNames.confirmPassword]: yup
     .string()
     .min(4)
     .max(30)

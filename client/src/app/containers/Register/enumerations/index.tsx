@@ -6,6 +6,7 @@
  */
 
 export enum fieldNames {
-  task = 'task',
-  checked = 'checked',
+  userName = 'userName',
+  password = 'password',
+  confirmPassword = 'confirmPassword',
 }

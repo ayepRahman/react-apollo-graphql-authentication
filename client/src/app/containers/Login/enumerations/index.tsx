@@ -6,16 +6,6 @@
  */
 
 export enum fieldNames {
-  firstName = 'firstName',
-  lastName = 'lastName',
+  userName = 'userName',
   password = 'password',
-  confirmPassword = 'confirmPassword',
-  email = 'email',
-  website = 'website',
-}
-
-export enum paths {
-  login = '/',
-  register = '/register',
-  dashboard = '/dashboard',
 }
