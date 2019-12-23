@@ -7,6 +7,7 @@ body {
     background-color: #fafafa;
     font-family: 'Open Sans', sans-serif;
     margin: 0;
+    
   }
 `;
 

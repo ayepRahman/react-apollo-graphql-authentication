@@ -16,10 +16,10 @@ interface IPrivateRoute {
 }
 
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ children, ...props }) => {
-  let history = useHistory();
+  const history = useHistory();
 
   if (!Cookies.get('token')) {
-    history.push(paths.login);
+    history.push(paths.home);
   }
 
   return <Route {...props}>{children}</Route>;

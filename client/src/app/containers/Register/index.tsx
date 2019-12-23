@@ -12,7 +12,11 @@ import useForm from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
 import { GET_REGISTER, CREATE_REGISTER } from './gql';
+import Card from 'app/components/Card';
+import Spacing from 'app/components/Spacing';
 import styled from 'styled-components';
+import { Title, Subtitle } from 'app/components/Typography';
+
 const RegisterContainer = styled.div``;
 
 /**
@@ -96,6 +100,11 @@ export const Register: React.FC = () => {
           placeholder="Username"
         />
         <Input
+          onChange={e => setValue(fieldNames.email, e.target.value)}
+          name={fieldNames.email}
+          placeholder="Email"
+        />
+        <Input
           onChange={e => setValue(fieldNames.password, e.target.value)}
           name={fieldNames.password}
           placeholder="Password"
@@ -113,9 +122,9 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div>
+    <Card>
       <Form />
-    </div>
+    </Card>
   );
 };
 

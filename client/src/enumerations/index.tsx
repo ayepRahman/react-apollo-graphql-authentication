@@ -15,7 +15,6 @@ export enum fieldNames {
 }
 
 export enum paths {
-  login = '/',
-  register = '/register',
+  home = '/',
   dashboard = '/dashboard',
 }

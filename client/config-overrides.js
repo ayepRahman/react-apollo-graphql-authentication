@@ -15,7 +15,7 @@ module.exports = override(
   addLessLoader({
     javascriptEnabled: true,
     modifyVars: {
-      '@primary-color': '#0ED2AC',
+      '@primary-color': '#ad5389',
       // '@link-color': #1890ff; // link color
       // '@success-color': #52c41a; // success state color
       // '@warning-color': #faad14; // warning state color

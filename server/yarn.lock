@@ -931,9 +931,9 @@
     "@types/node" "*"
 
 "@types/mongoose@^5.7.5":
-  version "5.5.32"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.5.32.tgz#8a76c5be029086c1225bf88ed3ca83f01181121f"
-  integrity sha512-2BemWy7SynT87deweqc2eCzg6pRyTVlnnMat2JxsTNoyeSFKC27b19qBTeKRfBVt+SjtaWd/ud4faUaObONwBA==
+  version "5.5.34"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.5.34.tgz#b77fdd8f5a80d1315c47a53d9166c6ff95f63898"
+  integrity sha512-XSXKMIZimxx8q17RGQArawrTVI8021PPbP21WEq71YTUMpVuaJaN9yFQll5KtEif5Jw1cphxEFkNwrDmuG+NFA==
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
@@ -1707,10 +1707,23 @@ convert-source-map@^1.1.0:
   dependencies:
     safe-buffer "~5.1.1"
 
+cookie-parser@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/cookie-parser/-/cookie-parser-1.4.4.tgz#e6363de4ea98c3def9697b93421c09f30cf5d188"
+  integrity sha512-lo13tqF3JEtFO7FyA49CqbhaFkskRJ0u/UAiINgrIXeRCY41c88/zxtrECl8AKH3B0hj9q10+h3Kt8I7KlW4tw==
+  dependencies:
+    cookie "0.3.1"
+    cookie-signature "1.0.6"
+
 cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
+
+cookie@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+  integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
 
 cookie@0.4.0:
   version "0.4.0"
@@ -1740,7 +1753,7 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-cors@^2.8.4:
+cors@^2.8.4, cors@^2.8.5:
   version "2.8.5"
   resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
   integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==

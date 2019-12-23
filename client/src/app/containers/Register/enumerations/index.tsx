@@ -7,6 +7,7 @@
 
 export enum fieldNames {
   userName = 'userName',
+  email = 'email',
   password = 'password',
   confirmPassword = 'confirmPassword',
 }

@@ -12,11 +12,11 @@ import useForm from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
 import { GET_LOGIN, CREATE_LOGIN } from './gql';
+import Card from 'app/components/Card';
+import Spacing from 'app/components/Spacing';
+import { Title, Subtitle } from 'app/components/Typography';
 import styled from 'styled-components';
 
-// const LoginContainer = styled.div``;
-
-// @dev return function that you can call to execute query
 export const LazyGetLogin = () => {
   const [getTodos, { loading, error, data }] = useLazyQuery(GET_LOGIN);
 
@@ -59,8 +59,6 @@ export const Login: React.FC = () => {
     validationSchema,
   });
 
-  console.log(errors);
-
   React.useEffect(() => {
     Object.keys(fieldNames).forEach(key => {
       register({ name: key });
@@ -74,27 +72,37 @@ export const Login: React.FC = () => {
   const Form = () => {
     return (
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Input
-          onChange={e => setValue(fieldNames.userName, e.target.value)}
-          name={fieldNames.userName}
-          placeholder="Username"
-        />
-        <Input
-          onChange={e => setValue(fieldNames.password, e.target.value)}
-          name={fieldNames.password}
-          placeholder="Password"
-        />
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        <Title>Log in in to your account</Title>
+        <Subtitle>
+          Continue Log in to your account, so you can continue building cool stuff!
+        </Subtitle>
+        <Spacing margin="0 0 8px 0">
+          <Input
+            onChange={e => setValue(fieldNames.userName, e.target.value)}
+            name={fieldNames.userName}
+            placeholder="Username"
+          />
+        </Spacing>
+        <Spacing margin="0 0 16px 0">
+          <Input
+            onChange={e => setValue(fieldNames.password, e.target.value)}
+            name={fieldNames.password}
+            placeholder="Password"
+          />
+        </Spacing>
+        <Spacing>
+          <Button block type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Spacing>
       </form>
     );
   };
 
   return (
-    <div>
+    <Card>
       <Form />
-    </div>
+    </Card>
   );
 };
 
