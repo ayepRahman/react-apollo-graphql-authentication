@@ -92,7 +92,7 @@ export const Login: React.FC = () => {
         </Spacing>
         <Spacing>
           <Button block type="primary" htmlType="submit">
-            Submit
+            Log in
           </Button>
         </Spacing>
       </form>
@@ -100,9 +100,9 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <Card>
+    <Spacing margin="0 5rem" display="flex" justify="center" height="100vh" align="center">
       <Form />
-    </Card>
+    </Spacing>
   );
 };
 

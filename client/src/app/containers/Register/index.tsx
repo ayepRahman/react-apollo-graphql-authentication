@@ -94,37 +94,49 @@ export const Register: React.FC = () => {
   const Form = () => {
     return (
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Input
-          onChange={e => setValue(fieldNames.userName, e.target.value)}
-          name={fieldNames.userName}
-          placeholder="Username"
-        />
-        <Input
-          onChange={e => setValue(fieldNames.email, e.target.value)}
-          name={fieldNames.email}
-          placeholder="Email"
-        />
-        <Input
-          onChange={e => setValue(fieldNames.password, e.target.value)}
-          name={fieldNames.password}
-          placeholder="Password"
-        />
-        <Input
-          onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
-          name={fieldNames.confirmPassword}
-          placeholder="Confirm Password"
-        />
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Title>Sign up for an Account</Title>
+        <Subtitle>
+          Let's get you all set up so you can start creating you unique onboarding experience
+        </Subtitle>
+        <Spacing margin="0 0 16px 0">
+          <Input
+            onChange={e => setValue(fieldNames.userName, e.target.value)}
+            name={fieldNames.userName}
+            placeholder="Username"
+          />
+        </Spacing>
+        <Spacing margin="0 0 16px 0">
+          <Input
+            onChange={e => setValue(fieldNames.email, e.target.value)}
+            name={fieldNames.email}
+            placeholder="Email"
+          />
+        </Spacing>
+        <Spacing margin="0 0 16px 0">
+          <Input
+            onChange={e => setValue(fieldNames.password, e.target.value)}
+            name={fieldNames.password}
+            placeholder="Password"
+          />
+        </Spacing>
+        <Spacing margin="0 0 16px 0">
+          <Input
+            onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
+            name={fieldNames.confirmPassword}
+            placeholder="Confirm Password"
+          />
+        </Spacing>
+        <Button block type="primary" htmlType="submit">
+          Sign up
         </Button>
       </form>
     );
   };
 
   return (
-    <Card>
+    <Spacing margin="0 5rem" display="flex" justify="center" height="100vh" align="center">
       <Form />
-    </Card>
+    </Spacing>
   );
 };
 
