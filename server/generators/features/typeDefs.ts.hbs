@@ -19,9 +19,9 @@ const typeDefs = `
 
     {{#if wantMutation}}
     type Mutation {
-      create{{ propercaseCase name }}(task: String!, checked: Boolean!): [Todos!]!
-      update{{ propercaseCase name }}ById(id: ID!, task: String!, checked: Boolean!): [Todos!]!
-      delete{{ propercaseCase name }}Id(id: ID!): [Todos!]!
+      create{{ properCase name }}(task: String!, checked: Boolean!): [Todos!]!
+      update{{ properCase name }}ById(id: ID!, task: String!, checked: Boolean!): [Todos!]!
+      delete{{ properCase name }}Id(id: ID!): [Todos!]!
     }
     {{/if}}
 

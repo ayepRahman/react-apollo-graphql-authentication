@@ -1,0 +1,15 @@
+{{#if wantQuery}}
+import queries from './queries';
+{{/if}}
+{{#if wantMutation}}
+import mutations from './mutations';
+{{/if}}
+
+export default {
+  {{#if wantQuery}}
+  Query: queries,
+  {{/if}}
+  {{#if wantMutation}}
+  Mutation: mutations,
+  {{/if}}
+};

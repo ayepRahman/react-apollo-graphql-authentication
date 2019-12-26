@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -15,7 +14,8 @@
     "noEmit": true,
     "jsx": "react",
     "types": ["jest", "node"],
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "src"
   },
   "include": ["src"]
 }

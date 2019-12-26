@@ -2,17 +2,19 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "allowJs": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "sourceMap": true,
+    "noEmit": true,
     "outDir": "build",
-    "baseUrl": "src",
-    "lib": ["ESNext"]
-    // "paths": {
-    //   "*": ["node_modules/*"]
-    // }
+    "lib": ["esnext"],
+    "types": ["jest", "node"],
+    "isolatedModules": true,
+    "baseUrl": "src"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": ["src"]
 }

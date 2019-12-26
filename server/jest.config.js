@@ -6,7 +6,7 @@ module.exports = {
   bail: true,
   moduleDirectories: ['node_modules', path.join(__dirname, 'src')],
   moduleFileExtensions: ['js', 'json', 'ts', 'node'],
-  collectCoverageFrom: ['src/app/**/*.{js,ts}'],
+  collectCoverageFrom: ['src/**/*.{js,ts}'],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -22,9 +22,9 @@ module.exports = {
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.ts?$': 'ts-jest',
   },
   // when using React Testing Library and adds special
   // extended assertions to Jest
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect', 'jest-styled-components'],
+  // setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect', 'jest-styled-components'],
 };
