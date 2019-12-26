@@ -1,9 +1,9 @@
 import { Todos } from './todos/model';
-import { AuthsModel } from './auth/model'
+import { UsersModel } from './users/model';
 /* CODE-GENERATOR - ROOTMODELS IMPORT */
 
 export default {
   Todos,
-  AuthsModel,
-/* CODE-GENERATOR - ROOTMODELS DEFAULT */
+  UsersModel,
+  /* CODE-GENERATOR - ROOTMODELS DEFAULT */
 };

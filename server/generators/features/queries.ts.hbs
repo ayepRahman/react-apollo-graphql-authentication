@@ -5,7 +5,15 @@
  */
 
 import { IResolverMap } from 'interfaces/IResolvers';
-import { AuthenticationError, UserInputError, ApolloError } from 'apollo-server'
+import { 
+  ApolloError,
+  toApolloError,
+  SyntaxError,
+  ValidationError,
+  AuthenticationError,
+  ForbiddenError,
+  UserInputError, 
+} from 'apollo-server'
 
 export default <IResolverMap>{
   get{{ properCase name }}ById: async (parent, args, { models }, info) => {
