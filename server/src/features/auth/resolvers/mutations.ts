@@ -39,7 +39,7 @@ export default <IResolverMap>{
       }
 
       return {
-        token: jwt.sign(user, SECRET),
+        token: jwt.sign({ uid: user._id }, SECRET),
       };
     } catch (error) {
       throw new Error(error.message);
@@ -50,6 +50,12 @@ export default <IResolverMap>{
     const { username, email, password } = args;
 
     try {
+      const isUser = await UsersModel.findOne({ username });
+
+      if (isUser) {
+        throw new UserInputError(errorMessages.userNameIsFound);
+      }
+
       const newUser = await UsersModel.create({
         username,
         email,
@@ -57,26 +63,10 @@ export default <IResolverMap>{
       });
 
       return {
-        token: jwt.sign({ username: newUser.username, uid: newUser._id }, SECRET),
+        token: jwt.sign({ uid: newUser._id }, SECRET),
       };
     } catch (error) {
       throw new Error(error.message);
     }
-  },
-  userNameAutoComplete: async (parent, args, { models }) => {
-    const { UsersModel } = models;
-    const { username } = args;
-
-    const isUserNameFound = await UsersModel.findOne({ username });
-
-    if (isUserNameFound) {
-      return {
-        ok: false,
-      };
-    }
-
-    return {
-      ok: true,
-    };
   },
 };

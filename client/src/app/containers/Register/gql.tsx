@@ -6,38 +6,19 @@
 
 import gql from 'graphql-tag';
 
-export const GET_REGISTER = gql`
-  query {
-    getRegister {
-      id
-      task
-      checked
+export const REGISTER = gql`
+  mutation Register($username: String!, $email: String!, $password: String!) {
+    register(username: $username, email: $email, password: $password) {
+      token
     }
   }
 `;
 
-export const CREATE_REGISTER = gql`
-  mutation CreateRegisters($task: String!, $checked: Boolean!) {
-    createRegisters(task: $task, checked: $checked) {
-      id
-      task
-      checked
-    }
-  }
-`;
-
-export const DELETE_REGISTER = gql`
-  mutation DeleteRegister($id: ID!) {
-    deleteRegisterById(id: $id) {
-      task
-    }
-  }
-`;
-
-export const UPDATE_REGISTER = gql`
-  mutation UpdateRegister($task: String!, $id: ID!, $checked: Boolean!) {
-    updateRegistersById(task: $task, id: $id, checked: $checked) {
-      task
+export const USER_NAME_AUTOCOMPLETE = gql`
+  query AutoComplete($username: String!) {
+    userNameAutoComplete(username: $username) {
+      ok
+      message
     }
   }
 `;

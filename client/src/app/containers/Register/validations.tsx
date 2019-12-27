@@ -12,19 +12,24 @@ export const validationSchema = yup.object().shape({
     .string()
     .min(4)
     .max(30)
-    .required(),
+    .required()
+    .label('Username'),
   [fieldNames.email]: yup
     .string()
     .email()
-    .required(),
+    .required()
+    .label('Email'),
   [fieldNames.password]: yup
     .string()
     .min(4)
     .max(30)
-    .required(),
+    .required()
+    .label('Password'),
   [fieldNames.confirmPassword]: yup
     .string()
     .min(4)
     .max(30)
-    .required(),
+    .required()
+    .oneOf([yup.ref('password'), null], "Passwords don't match")
+    .label('Confirm Password'),
 });

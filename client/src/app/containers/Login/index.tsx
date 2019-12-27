@@ -8,7 +8,7 @@ import React from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 // import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom';
 import { Input, Button } from 'antd';
-import useForm from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
 import { GET_LOGIN, CREATE_LOGIN } from './gql';

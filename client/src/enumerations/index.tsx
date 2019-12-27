@@ -5,16 +5,11 @@
  *
  */
 
-export enum fieldNames {
-  firstName = 'firstName',
-  lastName = 'lastName',
-  password = 'password',
-  confirmPassword = 'confirmPassword',
-  email = 'email',
-  website = 'website',
-}
-
 export enum paths {
   home = '/',
   dashboard = '/dashboard',
+}
+
+export enum localStorageNames {
+  token = 'x-token',
 }

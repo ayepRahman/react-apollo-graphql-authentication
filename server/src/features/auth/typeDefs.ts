@@ -1,14 +1,15 @@
 //TODO: improve type schema
 
 const typeDefs = `
-    type Ok {
+    type UserNameAutoComplete {
       ok: Boolean!
+      message: String
     }
 
     type User {
       id: ID!
-      username: String!
-      email: String!
+      username: String
+      email: String
     }
 
     type Token {
@@ -18,11 +19,10 @@ const typeDefs = `
     type Mutation {
       login(username: String!, password: String!): Token!
       register(username: String!, email: String!, password: String!): Token!
-      userNameAutoComplete(username: String!): Ok!
     }
 
     type Query {
-      dummy: String
+      userNameAutoComplete(username: String!): UserNameAutoComplete!
     }
 
     schema {

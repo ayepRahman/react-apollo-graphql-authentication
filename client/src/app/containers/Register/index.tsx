@@ -5,93 +5,97 @@
  */
 
 import React from 'react';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { useDebouncedCallback } from 'use-debounce';
+import { useHistory } from 'react-router-dom';
 import { Input, Button } from 'antd';
-import useForm from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
-import { GET_REGISTER, CREATE_REGISTER } from './gql';
-import Card from 'app/components/Card';
+import { REGISTER, USER_NAME_AUTOCOMPLETE } from './gql';
 import Spacing from 'app/components/Spacing';
-import styled from 'styled-components';
 import { Title, Subtitle } from 'app/components/Typography';
+import ErrorMessage from 'app/components/ErrorMessage';
+import Message from 'app/components/Message';
+import { localStorageNames, paths } from 'enumerations';
 
-const RegisterContainer = styled.div``;
-
-/**
- * TODO:
- * - username autocomplete, to check if user name is available in db
- * - password
- * - confirmPassword
- * - redirect to login
- */
-
-// @dev return function that you can call to execute query
-export const LazyGetRegister = () => {
-  const [getTodos, { loading, error, data }] = useLazyQuery(GET_REGISTER);
-
-  React.useEffect(() => {
-    getTodos({
-      variables: {
-        name: 'John Doe',
-      },
-    });
-  }, []);
-
-  if (loading) return <div>...loading</div>;
-  if (error) return <div>{JSON.stringify(error)}</div>;
-  return <div>{JSON.stringify(data)}</div>;
-};
-
-export const CreateRegister = () => {
-  const [createTodo, { loading, error, data }] = useMutation(CREATE_REGISTER);
-
-  if (loading) return <div>...Loading</div>;
-  if (error) return <div>{JSON.stringify(error)}</div>;
-  return (
-    <div>
-      <button
-        onClick={() =>
-          createTodo({
-            variables: { task: 'Buy Something', checked: true },
-          })
-        }
-      >
-        Add Todo
-      </button>
-      <div>{JSON.stringify(data)}</div>
-    </div>
-  );
-};
+const { Search } = Input;
 
 export const Register: React.FC = () => {
-  const { register, handleSubmit, setValue, errors, reset } = useForm({
-    validationSchema,
-    defaultValues: {
-      firstName: 'bill',
-      lastName: 'luo',
-      password: '123123123',
-      confirmPassword: '123123123',
-      email: 'bluebill1049@hotmail.com',
-      website: 'www.google.com',
-      pets: ['dog', 'cat'],
-    },
-  });
-
-  console.log(errors);
-
-  React.useEffect(() => {
-    Object.keys(fieldNames).forEach(key => {
-      register({ name: key });
-    });
-  });
-
-  const onFormSubmit = (values: any) => {
-    console.log(values);
-  };
-
   const Form = () => {
+    const history = useHistory();
+    const [userNameIsAvailable, setUserNameIsAvailable] = React.useState<boolean>(false);
+    const [autoComplete, { data: autoCompleteData, loading: isAutoCompleting }] = useLazyQuery(
+      USER_NAME_AUTOCOMPLETE
+    );
+    const [registerUser, { loading: isRegisteting }] = useMutation(REGISTER);
+    const { register, handleSubmit, setValue, errors } = useForm({
+      validationSchema,
+      mode: 'onBlur',
+      reValidateMode: 'onSubmit',
+    });
+    const [debouncedCallback] = useDebouncedCallback((username: string) => {
+      autoComplete({
+        variables: {
+          username,
+        },
+      });
+    }, 1000);
+
+    React.useEffect(() => {
+      if (autoCompleteData) {
+        const { userNameAutoComplete } = autoCompleteData;
+        const ok: boolean = userNameAutoComplete && userNameAutoComplete.ok;
+        setUserNameIsAvailable(ok);
+      }
+    }, [autoCompleteData]);
+
+    React.useEffect(() => {
+      Object.keys(fieldNames).forEach(key => {
+        register({ name: key });
+      });
+    });
+
+    const onFormSubmit = async (values: any) => {
+      const { userName, email, password } = values;
+      const response: any = await registerUser({
+        variables: {
+          username: userName,
+          email,
+          password,
+        },
+      });
+
+      console.log('response', response);
+
+      if (response) {
+        const token =
+          response && response.data && response.data.register && response.data.register.token;
+
+        if (token) {
+          localStorage.setItem(localStorageNames.token, token);
+          history.push(paths.dashboard);
+        }
+      }
+    };
+
+    const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
+      debouncedCallback(e.target.value);
+      setValue(fieldNames.userName, e.target.value);
+    };
+
+    const renderUserNameAvailability = () => {
+      return (
+        <>
+          {userNameIsAvailable ? (
+            <Message color="success">User name is available</Message>
+          ) : (
+            <Message color="error">User name is not allowed!</Message>
+          )}
+        </>
+      );
+    };
+
     return (
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Title>Sign up for an Account</Title>
@@ -99,11 +103,15 @@ export const Register: React.FC = () => {
           Let's get you all set up so you can start creating you unique onboarding experience
         </Subtitle>
         <Spacing margin="0 0 16px 0">
-          <Input
-            onChange={e => setValue(fieldNames.userName, e.target.value)}
+          <Search
+            onChange={onChangeUserName}
             name={fieldNames.userName}
             placeholder="Username"
+            loading={isAutoCompleting}
+            enterButton
           />
+          {autoCompleteData ? renderUserNameAvailability() : null}
+          <ErrorMessage errors={errors} name={fieldNames.userName} />
         </Spacing>
         <Spacing margin="0 0 16px 0">
           <Input
@@ -111,22 +119,27 @@ export const Register: React.FC = () => {
             name={fieldNames.email}
             placeholder="Email"
           />
+          <ErrorMessage errors={errors} name={fieldNames.email} />
         </Spacing>
         <Spacing margin="0 0 16px 0">
           <Input
+            type="password"
             onChange={e => setValue(fieldNames.password, e.target.value)}
             name={fieldNames.password}
             placeholder="Password"
           />
+          <ErrorMessage errors={errors} name={fieldNames.password} />
         </Spacing>
         <Spacing margin="0 0 16px 0">
           <Input
+            type="password"
             onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
             name={fieldNames.confirmPassword}
             placeholder="Confirm Password"
           />
+          <ErrorMessage errors={errors} name={fieldNames.confirmPassword} />
         </Spacing>
-        <Button block type="primary" htmlType="submit">
+        <Button block type="primary" htmlType="submit" loading={isRegisteting}>
           Sign up
         </Button>
       </form>

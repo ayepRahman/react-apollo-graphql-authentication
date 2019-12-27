@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import Cookies from 'js-cookie';
 import { Route, useHistory } from 'react-router-dom';
-import { paths } from 'enumerations';
+import { paths, localStorageNames } from 'enumerations';
 
 interface IPrivateRoute {
   path: string;
@@ -18,7 +17,7 @@ interface IPrivateRoute {
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ children, ...props }) => {
   const history = useHistory();
 
-  if (!Cookies.get('token')) {
+  if (!localStorage.getItem(localStorageNames.token)) {
     history.push(paths.home);
   }
 
