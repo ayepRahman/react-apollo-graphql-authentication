@@ -17,9 +17,6 @@ dotenv.config();
 const SALT = parseInt(process.env.SALT);
 const SECRET = process.env.SECRET;
 
-console.log('SALT', typeof SALT);
-console.log('SECRET', typeof SECRET);
-
 export default <IResolverMap>{
   login: async (parent, args, { models }) => {
     const { UsersModel } = models;

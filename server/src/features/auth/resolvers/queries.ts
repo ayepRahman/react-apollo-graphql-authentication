@@ -1,13 +1,4 @@
 import { IResolverMap } from 'interfaces/IResolvers';
-import {
-  ApolloError,
-  toApolloError,
-  SyntaxError,
-  ValidationError,
-  AuthenticationError,
-  ForbiddenError,
-  UserInputError,
-} from 'apollo-server';
 import errorMessages from 'enumerations/errorMessages';
 import dotenv from 'dotenv';
 dotenv.config();

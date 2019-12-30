@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Route, useHistory } from 'react-router-dom';
-import { paths, localStorageNames } from 'enumerations';
+import { ROUTES, LOCAL_STORAGE_TEMPLATE } from 'enumerations';
 
 interface IPrivateRoute {
   path: string;
@@ -17,8 +17,8 @@ interface IPrivateRoute {
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ children, ...props }) => {
   const history = useHistory();
 
-  if (!localStorage.getItem(localStorageNames.token)) {
-    history.push(paths.home);
+  if (!localStorage.getItem(LOCAL_STORAGE_TEMPLATE.token)) {
+    history.push(ROUTES.home);
   }
 
   return <Route {...props}>{children}</Route>;

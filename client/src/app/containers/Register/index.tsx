@@ -8,7 +8,7 @@ import React from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { useDebouncedCallback } from 'use-debounce';
 import { useHistory } from 'react-router-dom';
-import { Input, Button } from 'antd';
+import { Input, Button, message as antdMessage } from 'antd';
 import { useForm } from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
@@ -17,7 +17,7 @@ import Spacing from 'app/components/Spacing';
 import { Title, Subtitle } from 'app/components/Typography';
 import ErrorMessage from 'app/components/ErrorMessage';
 import Message from 'app/components/Message';
-import { localStorageNames, paths } from 'enumerations';
+import { LOCAL_STORAGE_TEMPLATE, ROUTES } from 'enumerations';
 
 const { Search } = Input;
 
@@ -28,7 +28,7 @@ export const Register: React.FC = () => {
     const [autoComplete, { data: autoCompleteData, loading: isAutoCompleting }] = useLazyQuery(
       USER_NAME_AUTOCOMPLETE
     );
-    const [registerUser, { loading: isRegisteting }] = useMutation(REGISTER);
+    const [registerUser, { loading: isRegisteting, error }] = useMutation(REGISTER);
     const { register, handleSubmit, setValue, errors } = useForm({
       validationSchema,
       mode: 'onBlur',
@@ -41,6 +41,12 @@ export const Register: React.FC = () => {
         },
       });
     }, 1000);
+
+    React.useEffect(() => {
+      if (error) {
+        antdMessage.error(error.message);
+      }
+    }, [error]);
 
     React.useEffect(() => {
       if (autoCompleteData) {
@@ -66,15 +72,14 @@ export const Register: React.FC = () => {
         },
       });
 
-      console.log('response', response);
-
       if (response) {
         const token =
           response && response.data && response.data.register && response.data.register.token;
 
         if (token) {
-          localStorage.setItem(localStorageNames.token, token);
-          history.push(paths.dashboard);
+          // storing token in localStorage
+          localStorage.setItem(LOCAL_STORAGE_TEMPLATE.token, token);
+          history.push(ROUTES.dashboard);
         }
       }
     };
@@ -88,9 +93,19 @@ export const Register: React.FC = () => {
       return (
         <>
           {userNameIsAvailable ? (
-            <Message color="success">User name is available</Message>
+            <Message color="success">
+              <span role="img" aria-label="success">
+                ✅
+              </span>
+              User name is available!
+            </Message>
           ) : (
-            <Message color="error">User name is not allowed!</Message>
+            <Message color="error">
+              <span role="img" aria-label="error">
+                ❌
+              </span>
+              User name is already in use!
+            </Message>
           )}
         </>
       );
@@ -106,7 +121,7 @@ export const Register: React.FC = () => {
           <Search
             onChange={onChangeUserName}
             name={fieldNames.userName}
-            placeholder="Username"
+            placeholder="User Name"
             loading={isAutoCompleting}
             enterButton
           />

@@ -3,7 +3,7 @@ enum errorMessages {
   auth = 'You must be logged in!',
   userNameNotFound = 'User name is not found!',
   userNameIsFound = 'User name is not available!',
-  wrongPassword = 'Password does not match with user!',
+  wrongPassword = 'Incorrect password!',
 }
 
 export default errorMessages;

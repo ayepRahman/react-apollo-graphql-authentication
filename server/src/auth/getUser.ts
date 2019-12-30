@@ -1,15 +1,20 @@
+import express from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { AuthenticationError, UserInputError } from 'apollo-server';
-import errorMessages from 'enumerations/errorMessages';
 
 dotenv.config();
 
-const getUser = async (token: any): Promise<string | object> => {
+const getUser = (req: express.Request): string | object => {
+  const token = req.headers.authorization || '';
   const SECRET = process.env.SECRET;
-  const user = await jwt.verify(token, SECRET);
-  console.log('>>>>>>> USER', user);
-  return user;
+
+  if (token) {
+    const tokenValue = token.replace('Bearer ', '');
+    const user = jwt.verify(tokenValue, SECRET);
+    return user;
+  }
+
+  return null;
 };
 
 export default getUser;

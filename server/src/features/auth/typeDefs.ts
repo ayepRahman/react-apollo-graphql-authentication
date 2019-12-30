@@ -1,5 +1,3 @@
-//TODO: improve type schema
-
 const typeDefs = `
     type UserNameAutoComplete {
       ok: Boolean!

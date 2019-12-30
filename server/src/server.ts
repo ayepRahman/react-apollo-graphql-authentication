@@ -15,10 +15,10 @@ const app: express.Application = express();
 const server = new ApolloServer({
   schema: rootSchema,
   context: ({ req }) => {
-    const token = req.headers.authentication || '';
-    const user = getUser(token);
+    // Getting current user from req headers
+    const user = getUser(req);
     return {
-      user,
+      currentUser: user,
       models: rootModels,
     };
   },

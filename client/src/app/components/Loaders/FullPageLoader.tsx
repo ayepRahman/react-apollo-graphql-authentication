@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Spin } from 'antd';
 
 const FullPageLoaderContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
   position: fixed;
   display: flex;

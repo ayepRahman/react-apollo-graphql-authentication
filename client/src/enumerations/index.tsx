@@ -5,11 +5,14 @@
  *
  */
 
-export enum paths {
+export enum ROUTES {
   home = '/',
   dashboard = '/dashboard',
+  page403 = '/403',
+  page404 = '/404',
+  page500 = '/500',
 }
 
-export enum localStorageNames {
+export enum LOCAL_STORAGE_TEMPLATE {
   token = 'x-token',
 }

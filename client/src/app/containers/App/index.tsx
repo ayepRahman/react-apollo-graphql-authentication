@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global';
-import { paths } from 'enumerations';
+import { ROUTES } from 'enumerations';
 import PrivateRoute from 'app/containers/PrivateRoute';
 import FullPageLoader from 'app/components/Loaders/FullPageLoader';
 
@@ -15,10 +15,10 @@ const App: React.FC = () => {
   return (
     <Suspense fallback={<FullPageLoader />}>
       <Switch>
-        <Route exact path={paths.home}>
+        <Route exact path={ROUTES.home}>
           <Home />
         </Route>
-        <PrivateRoute exact path={paths.dashboard}>
+        <PrivateRoute exact path={ROUTES.dashboard}>
           <Dashboard />
         </PrivateRoute>
       </Switch>
