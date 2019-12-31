@@ -1,5 +1,7 @@
 # React Apollo Graphql Authentication
 
+![alt text](./authentication.png)
+
 ## Client
 
 - Typescript
