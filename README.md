@@ -2,6 +2,10 @@
 
 ![alt text](./authentication.png)
 
+## Demo
+
+![alt text](./raga.gif)
+
 ## Client
 
 - Typescript
@@ -23,3 +27,8 @@
 - Login
 - Register
 - MongoDB
+
+## TODO
+
+- Client test coverage
+- Server test coverage

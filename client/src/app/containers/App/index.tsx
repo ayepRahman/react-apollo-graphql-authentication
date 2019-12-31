@@ -6,10 +6,7 @@ import PrivateRoute from 'app/containers/PrivateRoute';
 import FullPageLoader from 'app/components/Loaders/FullPageLoader';
 
 const Home = React.lazy(() => import('app/containers/Home'));
-
-const Dashboard: React.FC = () => {
-  return <div>DASHBOARD PRIVATE ARE</div>;
-};
+const Dashboard = React.lazy(() => import('app/containers/Dashboard'));
 
 const App: React.FC = () => {
   return (
