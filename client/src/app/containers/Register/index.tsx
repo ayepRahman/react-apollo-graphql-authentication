@@ -18,6 +18,7 @@ import { Title, Subtitle } from 'app/components/Typography';
 import ErrorMessage from 'app/components/ErrorMessage';
 import Message from 'app/components/Message';
 import { LOCAL_STORAGE_TEMPLATE, ROUTES } from 'enumerations';
+import { GoogleLogin } from 'react-google-login';
 
 const { Search } = Input;
 
@@ -112,52 +113,68 @@ export const Register: React.FC = () => {
     };
 
     return (
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Title>Sign up for an Account</Title>
-        <Subtitle>
-          Let's get you all set up so you can start creating you unique onboarding experience
-        </Subtitle>
-        <Spacing margin="0 0 16px 0">
-          <Search
-            onChange={onChangeUserName}
-            name={fieldNames.userName}
-            placeholder="User Name"
-            loading={isAutoCompleting}
-            enterButton
-          />
-          {autoCompleteData ? renderUserNameAvailability() : null}
-          <ErrorMessage errors={errors} name={fieldNames.userName} />
-        </Spacing>
-        <Spacing margin="0 0 16px 0">
-          <Input
-            onChange={e => setValue(fieldNames.email, e.target.value)}
-            name={fieldNames.email}
-            placeholder="Email"
-          />
-          <ErrorMessage errors={errors} name={fieldNames.email} />
-        </Spacing>
-        <Spacing margin="0 0 16px 0">
-          <Input
-            type="password"
-            onChange={e => setValue(fieldNames.password, e.target.value)}
-            name={fieldNames.password}
-            placeholder="Password"
-          />
-          <ErrorMessage errors={errors} name={fieldNames.password} />
-        </Spacing>
-        <Spacing margin="0 0 16px 0">
-          <Input
-            type="password"
-            onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
-            name={fieldNames.confirmPassword}
-            placeholder="Confirm Password"
-          />
-          <ErrorMessage errors={errors} name={fieldNames.confirmPassword} />
-        </Spacing>
-        <Button block type="primary" htmlType="submit" loading={isRegisteting}>
-          Sign up
-        </Button>
-      </form>
+      <>
+        <form onSubmit={handleSubmit(onFormSubmit)}>
+          <Title>Sign up for an Account</Title>
+          <Subtitle>
+            Let's get you all set up so you can start creating you unique onboarding experience
+          </Subtitle>
+          <Spacing margin="0 0 16px 0">
+            <Search
+              onChange={onChangeUserName}
+              name={fieldNames.userName}
+              placeholder="User Name"
+              loading={isAutoCompleting}
+              enterButton
+            />
+            {autoCompleteData ? renderUserNameAvailability() : null}
+            <ErrorMessage errors={errors} name={fieldNames.userName} />
+          </Spacing>
+          <Spacing margin="0 0 16px 0">
+            <Input
+              onChange={e => setValue(fieldNames.email, e.target.value)}
+              name={fieldNames.email}
+              placeholder="Email"
+            />
+            <ErrorMessage errors={errors} name={fieldNames.email} />
+          </Spacing>
+          <Spacing margin="0 0 16px 0">
+            <Input
+              type="password"
+              onChange={e => setValue(fieldNames.password, e.target.value)}
+              name={fieldNames.password}
+              placeholder="Password"
+            />
+            <ErrorMessage errors={errors} name={fieldNames.password} />
+          </Spacing>
+          <Spacing margin="0 0 16px 0">
+            <Input
+              type="password"
+              onChange={e => setValue(fieldNames.confirmPassword, e.target.value)}
+              name={fieldNames.confirmPassword}
+              placeholder="Confirm Password"
+            />
+            <ErrorMessage errors={errors} name={fieldNames.confirmPassword} />
+          </Spacing>
+          <Button block type="primary" htmlType="submit" loading={isRegisteting}>
+            Sign up
+          </Button>
+          <Spacing margin="8px 0 0">
+            <GoogleLogin
+              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={reponse => console.log(reponse)}
+              onFailure={reponse => console.log(reponse)}
+              cookiePolicy={'single_host_origin'}
+              render={renderProps => (
+                <Button icon="google" block type="danger" onClick={renderProps.onClick}>
+                  Login with Google
+                </Button>
+              )}
+            />
+          </Spacing>
+        </form>
+      </>
     );
   };
 

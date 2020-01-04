@@ -16,6 +16,7 @@ import ErrorMessage from 'app/components/ErrorMessage';
 import Spacing from 'app/components/Spacing';
 import { Title, Subtitle } from 'app/components/Typography';
 import { LOCAL_STORAGE_TEMPLATE, ROUTES } from 'enumerations';
+import { GoogleLogin } from 'react-google-login';
 
 export const Login: React.FC = () => {
   const Form = () => {
@@ -90,6 +91,20 @@ export const Login: React.FC = () => {
           <Button block type="primary" htmlType="submit" loading={isLogining}>
             Log in
           </Button>
+        </Spacing>
+        <Spacing margin="8px 0 0">
+          <GoogleLogin
+            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={reponse => console.log(reponse)}
+            onFailure={reponse => console.log(reponse)}
+            cookiePolicy={'single_host_origin'}
+            render={renderProps => (
+              <Button icon="google" block type="danger" onClick={renderProps.onClick}>
+                Login with Google
+              </Button>
+            )}
+          />
         </Spacing>
       </form>
     );
