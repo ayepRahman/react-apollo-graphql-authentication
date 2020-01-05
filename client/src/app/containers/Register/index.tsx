@@ -19,6 +19,7 @@ import ErrorMessage from 'app/components/ErrorMessage';
 import Message from 'app/components/Message';
 import { LOCAL_STORAGE_TEMPLATE, ROUTES } from 'enumerations';
 import { GoogleLogin } from 'react-google-login';
+import { GOOGLE_CLIENT_ID } from 'constants/index';
 
 const { Search } = Input;
 
@@ -161,7 +162,7 @@ export const Register: React.FC = () => {
           </Button>
           <Spacing margin="8px 0 0">
             <GoogleLogin
-              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+              clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
               onSuccess={reponse => console.log(reponse)}
               onFailure={reponse => console.log(reponse)}

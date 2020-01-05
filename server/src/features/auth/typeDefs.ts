@@ -17,6 +17,7 @@ const typeDefs = `
     type Mutation {
       login(username: String!, password: String!): Token!
       register(username: String!, email: String!, password: String!): Token!
+      googleAuth(accessToken: String!): Token!
     }
 
     type Query {
