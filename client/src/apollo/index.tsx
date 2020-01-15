@@ -10,7 +10,8 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const cache = new InMemoryCache({});
 
 const request = async (operation: any) => {
-  const token = await localStorage.getItem('token');
+  const token = await localStorage.getItem('x-token');
+  // set the token in the request header for authorization
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : '',
@@ -52,7 +53,7 @@ const link = ApolloLink.from([
   withClientState(state(cache)),
   new HttpLink({
     uri: SERVER_URL,
-    // For server with deifferent domain use "include"
+    // For server with different domain use "include"
     credentials: 'same-origin',
   }),
 ]);

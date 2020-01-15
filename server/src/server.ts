@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import mongooseConnect from './config/mongoose';
 import corsOptions from './config/corsOptions';
 import rootSchema from './features/rootSchema';
@@ -14,12 +14,15 @@ const app: express.Application = express();
 
 const server = new ApolloServer({
   schema: rootSchema,
-  context: ({ req }) => {
-    // Getting current user from req headers
+  context: ({ req, res }) => {
+    // get current user from req headers for authorization
     const user = getUser(req);
+    console.log('AUTHORIZE USER', user);
     return {
-      currentUser: user,
       models: rootModels,
+      user,
+      req,
+      res,
     };
   },
   formatError: err => {

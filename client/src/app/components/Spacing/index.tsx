@@ -7,6 +7,7 @@ interface ISpacing {
   margin?: string;
   padding?: string;
   display?: string;
+  textAlign?: string;
   align?: string;
   justify?: string;
 }
@@ -19,6 +20,7 @@ const Spacing = styled(animated.div)<ISpacing>`
   display: ${p => p.display && `${p.display}`};
   align-items: ${p => p.align && `${p.align}`};
   justify-content: ${p => p.justify && `${p.justify}`};
+  text-align: ${p => p.textAlign && `${p.textAlign}`};
 `;
 
 export default Spacing;

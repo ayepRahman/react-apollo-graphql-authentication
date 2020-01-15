@@ -6,6 +6,6 @@
  *
  */
 
-interface IRegister {}
+interface IFacebookAuthButton {}
 
-export default IRegister;
+export default IFacebookAuthButton;

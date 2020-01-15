@@ -1,7 +1,7 @@
 export default (d: Document, s: string, id: string, jsSrc: any, cb: () => void) => {
   const element = d.getElementsByTagName(s)[0];
   const fjs = element;
-  let js = element;
+  let js: any = element;
   js = d.createElement(s);
   js.id = id;
   js.src = jsSrc;

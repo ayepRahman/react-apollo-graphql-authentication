@@ -16,7 +16,7 @@ module.exports = override(
     javascriptEnabled: true,
     modifyVars: {
       '@primary-color': '#ad5389',
-      // '@link-color': #1890ff; // link color
+      // '@link-color': '#385898', // link color
       // '@success-color': #52c41a; // success state color
       // '@warning-color': #faad14; // warning state color
       // '@error-color': #f5222d; // error state color
