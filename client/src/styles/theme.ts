@@ -5,6 +5,8 @@ const theme = {
     success: '#11998e',
     error: '#ff4161',
     dark: '#272C34',
+    facebook: '#385898',
+    google: '#f83232',
   },
 };
 

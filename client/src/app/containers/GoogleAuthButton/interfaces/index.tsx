@@ -6,6 +6,6 @@
  *
  */
 
-interface IRegister {}
+interface IGoogleAuthButton {}
 
-export default IRegister;
+export default IGoogleAuthButton;

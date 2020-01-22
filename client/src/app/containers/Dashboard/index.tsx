@@ -1,9 +1,12 @@
 import React from 'react';
-import { Row, Button } from 'antd';
-import { useApolloClient } from '@apollo/react-hooks';
-import { useHistory } from 'react-router-dom';
+import { Row, Button, Avatar } from 'antd';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_USER } from './gql';
 import Col from 'app/components/Col';
+import Spacing from 'app/components/Spacing';
 import styled from 'styled-components';
+import FullPageLoader from 'app/components/Loaders/FullPageLoader';
+import useAuthUser from 'hooks/useAuthUser';
 
 const DashboardContainer = styled.div`
   height: 100vh;
@@ -16,30 +19,47 @@ const DashboardContainer = styled.div`
 `;
 
 const Dashboard = () => {
-  const client = useApolloClient();
-  const history = useHistory();
+  const { logout } = useAuthUser();
+  const { loading, error, data } = useQuery(GET_USER);
+  React.useEffect(() => {
+    if (error) {
+      console.log(error.message);
+    }
+  }, [error]);
 
-  const handleClick = () => {
-    client.resetStore();
-    localStorage.clear();
-    history.push('/');
+  const renderData = () => {
+    const userOne = data && data.userOne;
+
+    return (
+      <Row justify="center">
+        <Col>
+          <Spacing margin="0 0 16px" textAlign="center">
+            {userOne && userOne.imgUrl && (
+              <Spacing margin="0 0 16px" textAlign="center">
+                <Avatar size="large" src={userOne.imgUrl} />
+              </Spacing>
+            )}
+            <h2 style={{ color: '#ffffff' }}>
+              Welcome {(userOne && userOne.username) || 'John Doe'}! You're in a protected route
+            </h2>
+            <Spacing margin="0 0 16px" textAlign="center">
+              <Button size="large" type="primary" onClick={() => logout()}>
+                Log out
+              </Button>
+            </Spacing>
+          </Spacing>
+        </Col>
+        <Col></Col>
+      </Row>
+    );
   };
 
   return (
     <DashboardContainer>
-      <Row>
-        <Col>
-          <h1 style={{ color: '#ffffff' }}>You're in a protected route</h1>
-          <p>Only authorize user can access this page.</p>
-          <Button size="large" type="primary" onClick={handleClick}>
-            Log out
-          </Button>
-        </Col>
-      </Row>
+      {loading && <FullPageLoader />}
+      {data && data.userOne && renderData()}
     </DashboardContainer>
   );
 };
-
-Dashboard.propTypes = {};
 
 export default Dashboard;

@@ -25,9 +25,13 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.8.7",
+    "passport": "^0.4.1",
+    "passport-facebook-token": "^3.3.0",
+    "passport-google-token": "^0.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -41,6 +45,8 @@
     "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.35",
     "@types/node": "^12.11.1",
+    "@types/passport": "^1.0.2",
+    "@types/passport-facebook-token": "^0.4.34",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "plop": "^2.5.3",

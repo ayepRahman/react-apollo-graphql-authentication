@@ -6,6 +6,7 @@ export default (memoryCache: InMemoryCache) => ({
     isConnected: true,
     user: {
       token: null,
+      __typename: 'user',
     },
   },
   resolvers: {

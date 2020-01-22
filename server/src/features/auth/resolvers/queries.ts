@@ -1,7 +1,5 @@
 import { IResolverMap } from 'interfaces/IResolvers';
 import errorMessages from 'enumerations/errorMessages';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export default <IResolverMap>{
   userNameAutoComplete: async (parent, args, { models }) => {
