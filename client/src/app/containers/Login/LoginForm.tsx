@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { Input, Button, message as antdMessage } from 'antd';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { validationSchema } from './validations';
 import { fieldNames } from './enumerations';
 import { LOGIN } from './gql';
@@ -12,8 +12,9 @@ import useAuthUser from 'hooks/useAuthUser';
 
 export const LoginForm: React.FC = () => {
   const { setAuthUser } = useAuthUser();
-  const { register, handleSubmit, setValue, errors } = useForm({
+  const { handleSubmit, errors, control } = useForm({
     validationSchema,
+    mode: 'onChange',
   });
 
   const [login, { loading: isLogining, error, data: loginData }] = useMutation(LOGIN);
@@ -29,12 +30,6 @@ export const LoginForm: React.FC = () => {
     }
   }, [error]);
 
-  React.useEffect(() => {
-    Object.keys(fieldNames).forEach(key => {
-      register({ name: key });
-    });
-  }, [register]);
-
   const onFormSubmit = async (values: any) => {
     const { userName, password } = values;
     const response = await login({
@@ -43,10 +38,8 @@ export const LoginForm: React.FC = () => {
         password,
       },
     });
-
     if (response) {
       const token = response && response.data && response.data.login && response.data.login.token;
-
       if (token) {
         setAuthUser(token);
       }
@@ -58,19 +51,18 @@ export const LoginForm: React.FC = () => {
       <Title>Log in in to your account</Title>
       <Subtitle>Continue Log in to your account, so you can continue building cool stuff!</Subtitle>
       <Spacing margin="0 0 8px 0">
-        <Input
-          onChange={e => setValue(fieldNames.userName, e.target.value)}
+        <Controller
           name={fieldNames.userName}
-          placeholder="Username"
+          control={control}
+          as={<Input placeholder="Username" />}
         />
         <ErrorMessage errors={errors} name={fieldNames.userName} />
       </Spacing>
       <Spacing margin="0 0 16px 0">
-        <Input
-          type="password"
-          onChange={e => setValue(fieldNames.password, e.target.value)}
+        <Controller
           name={fieldNames.password}
-          placeholder="Password"
+          control={control}
+          as={<Input type="password" placeholder="Username" />}
         />
         <ErrorMessage errors={errors} name={fieldNames.password} />
       </Spacing>
