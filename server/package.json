@@ -27,7 +27,7 @@
     "graphql": "^14.5.8",
     "graphql-tools": "^4.0.6",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mongoose": "^5.8.7",
     "passport": "^0.4.1",
     "passport-facebook-token": "^3.3.0",
